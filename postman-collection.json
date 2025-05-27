@@ -1,0 +1,192 @@
+{
+  "collection": {
+    "info": {
+      "name": "Order API Assessment",
+      "description": "API collection for Order API Assessment",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Users",
+        "item": [
+          {
+            "name": "Create User",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"is_developer\": true\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/users",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["users"]
+              },
+              "description": "Create a new user"
+            }
+          },
+          {
+            "name": "Create User with Referral",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"name\": \"Jane Smith\",\n    \"email\": \"jane@example.com\",\n    \"referred_by\": \"11111111-1111-1111-1111-111111111111\",\n    \"is_developer\": false\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/users",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["users"]
+              },
+              "description": "Create a new user with referral"
+            }
+          },
+          {
+            "name": "Get User Referrals",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "http://localhost:3000/users/11111111-1111-1111-1111-111111111111/referrals",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["users", "11111111-1111-1111-1111-111111111111", "referrals"]
+              },
+              "description": "Get all users referred by a specific user"
+            }
+          },
+          {
+            "name": "Get User Referrer",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "http://localhost:3000/users/44444444-4444-4444-4444-444444444444/referrer",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["users", "44444444-4444-4444-4444-444444444444", "referrer"]
+              },
+              "description": "Get the user who referred a specific user"
+            }
+          },
+          {
+            "name": "Get User Orders",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "http://localhost:3000/orders/user/11111111-1111-1111-1111-111111111111",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["orders", "user", "11111111-1111-1111-1111-111111111111"]
+              },
+              "description": "Get all orders for a specific user"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Products",
+        "item": [
+          {
+            "name": "Create Product",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"name\": \"Laptop\",\n    \"price\": 1299.99,\n    \"stock\": 50\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/products",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["products"]
+              },
+              "description": "Create a new product"
+            }
+          },
+          {
+            "name": "Get Products",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "http://localhost:3000/products",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["products"]
+              },
+              "description": "Get all products (cached for 60 seconds)"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Orders",
+        "item": [
+          {
+            "name": "Create Order",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"userId\": \"11111111-1111-1111-1111-111111111111\",\n    \"items\": [\n        {\n            \"productId\": \"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa\",\n            \"quantity\": 1\n        }\n    ]\n}"
+              },
+              "url": {
+                "raw": "http://localhost:3000/orders",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["orders"]
+              },
+              "description": "Create a new order (rate limited to 5 per minute per user)"
+            }
+          },
+          {
+            "name": "Get Order",
+            "request": {
+              "method": "GET",
+              "url": {
+                "raw": "http://localhost:3000/orders/11111111-aaaa-1111-aaaa-111111111111",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "3000",
+                "path": ["orders", "11111111-aaaa-1111-aaaa-111111111111"]
+              },
+              "description": "Get a specific order with its items"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

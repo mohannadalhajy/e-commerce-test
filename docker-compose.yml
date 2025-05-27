@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # NestJS Application
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecommerce
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - NODE_ENV=development
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_NAME=ecommerce
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    networks:
+      - order-network
+    command: npm run start:dev
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:14-alpine
+    container_name: order-postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./seed.sql:/docker-entrypoint-initdb.d/2-seed.sql
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=ecommerce
+    networks:
+      - order-network
+
+  # Redis Cache
+  redis:
+    image: redis:alpine
+    container_name: order-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - order-network
+
+networks:
+  order-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
