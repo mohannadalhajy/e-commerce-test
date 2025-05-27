@@ -83,19 +83,22 @@ See [api-docs.md](api-docs.md) for detailed API documentation and example reques
 ## Project Structure
 ```
 ecommerce-assessment/
-├── src/
-│   ├── database/        # Database connection module
-│   ├── redis/           # Redis connection and service
-│   ├── users/           # Users module with referral system
-│   ├── products/        # Products module with caching
-│   ├── orders/          # Orders module with transactions
-│   ├── app.module.ts    # Main application module
-│   └── main.ts          # Application entry point
-├── schema.sql           # Database schema creation script
-├── seed.sql             # Database seed data script
-├── docker-compose.yml   # Docker Compose configuration
-├── Dockerfile           # NestJS application Dockerfile
-└── README.md            # Project documentation
+├── src/                    # Source code directory
+│   ├── config/             # Server configuration files
+│   ├── utils/              # Utility modules for external services
+│   │   ├── database/       # Database connection and utilities
+│   │   ├── redis/          # Redis connection and service helpers
+│   ├── users/              # User management and referral system
+│   ├── products/           # Product-related logic with caching
+│   ├── orders/             # Order handling with transaction management
+│   ├── app.module.ts       # Main application module (entry point)
+│   └── main.ts             # Application startup and initialization
+├── schema.sql              # SQL script for database schema setup
+├── seed.sql                # SQL script for seeding initial data into the database
+├── docker-compose.yml      # Docker Compose configuration for multi-container setup
+├── Dockerfile              # Dockerfile for building the NestJS application container
+└── README.md               # Project documentation and setup guide
+
 ```
 
 ## Bonus Features
