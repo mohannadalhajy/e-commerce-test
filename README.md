@@ -78,7 +78,7 @@ Examples of raw SQL usage:
 - Joins for retrieving orders with their items
 
 ## API Documentation
-See [api-docs.md](api-docs.md) for detailed API documentation and example requests.
+See http://localhost:3000/api-docs for detailed API documentation and example requests.
 
 ## Project Structure
 ```
